@@ -1,0 +1,2 @@
+recursive-include hicops_django_app/static *
+recursive-include hicops_django_app/templates *
