@@ -15,19 +15,19 @@
   {% endif %} >
 
   <div slot="Mods Information" x-data="{
-        modules: [['', '', '']],
+        modifications: [['', '', '']],
         get mods() {
-            const moduleStrings = [];
-            for (const module of this.modules) {
-                if (module.length === 3 && module[0] && module[1] && module[2]) {
-                    moduleStrings.push(module.join(':'));
+            const modStrings = [];
+            for (const modification of this.modifications) {
+                if (modification.length === 3 && modification[0] && modification[1] && modification[2]) {
+                    modStrings.push(modification.join(':'));
                 }
             }
-            return moduleStrings.join(',');
+            return modStrings.join(',');
         },
         set mods(value) {
             if (value) {
-                this.modules = value.split(',').map(m => m.split(':'));
+                this.modifications = value.split(',').map(m => m.split(':'));
             }
         },
         changed() {
@@ -39,7 +39,7 @@
             this.$root.dispatchEvent(inputEvent);
         },
         remove(index) {
-            this.modules.splice(index, 1);
+            this.modifications.splice(index, 1);
             this.changed();
         },
         initValue(event) {
@@ -47,15 +47,15 @@
         }
     }" @adpf-input-init="initValue">
     Mods Information
-    <template x-for="(module, index) in modules">
+    <template x-for="(modification, index) in modifications">
         <div>
-            <input type="text" x-model="module[0]" @input.stop="changed"/>
-            <input type="text" x-model="module[1]" @input.stop="changed"/>
-            <input type="text" x-model="module[2]" @input.stop="changed" />
-            <button @click="remove(index)" x-show="modules.length > 1">Remove</button>
+            <input type="text" x-model="modification[0]" @input.stop="changed"/>
+            <input type="text" x-model="modification[1]" @input.stop="changed"/>
+            <input type="text" x-model="modification[2]" @input.stop="changed" />
+            <button @click="remove(index)" x-show="modifications.length > 1">Remove</button>
         </div>
     </template>
-    <button @click="modules.push(['', '', ''])">Add module</button>
+    <button @click="modifications.push(['', '', ''])">Add modification</button>
   </div>
 </adpf-experiment-editor>
 {% endblock custom-content %}
